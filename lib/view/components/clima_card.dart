@@ -18,34 +18,33 @@ class ClimaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: height,
-        width: width,
-        child: Card(
-          color: Colors.grey[500],
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.cloud_sharp, color: Colors.white),
-                  Text(
-                    temperature,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                wind,
-              ),
-              Text(
-                day,
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              ),
-            ],
+      height: height,
+      width: width,
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            'Dia $day',
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
-        ));
+          const Icon(Icons.cloud_sharp, color: Colors.white),
+          Text(
+            temperature,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+          Text(
+            wind,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
