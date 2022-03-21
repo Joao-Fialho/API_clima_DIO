@@ -17,6 +17,26 @@ class ModelClima {
   String toString() {
     return 'ModelClima(temperature: $temperature, wind: $wind, description: $description, forecast: $forecast)';
   }
+
+  static ModelClima fromJson(Map map) {
+    final List<ModelForecast> forecastList = [];
+    for (final forecast in map['forecast']) {
+      final forecastModel = ModelForecast(
+        day: forecast['day'],
+        temperature: forecast['temperature'],
+        wind: forecast['wind'],
+      );
+
+      forecastList.add(forecastModel);
+    }
+
+    return ModelClima(
+      temperature: map['temperature'],
+      wind: map['wind'],
+      description: map['description'],
+      forecast: forecastList,
+    );
+  }
 }
 
 class ModelForecast {

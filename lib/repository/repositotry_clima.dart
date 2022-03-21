@@ -1,30 +1,16 @@
-import 'package:api_clima_dio/model/model_clima.dart';
 import 'package:dio/dio.dart';
+import 'package:api_clima_dio/model/model_clima.dart';
 
 class RepositoryClima {
+  final Dio dio;
+  RepositoryClima({
+    required this.dio,
+  });
   Future<ModelClima> fetchClima(cidade) async {
     final url = 'https://goweather.herokuapp.com/weather/$cidade';
-    final response = await Dio().get(url);
+    final response = await dio.get(url);
     final body = response.data;
-    final List<ModelForecast> forecastList = [];
-
-    for (final forecast in body['forecast']) {
-      final forecastModel = ModelForecast(
-        day: forecast['day'],
-        temperature: forecast['temperature'],
-        wind: forecast['wind'],
-      );
-
-      forecastList.add(forecastModel);
-    }
-
-    final ModelClima json = ModelClima(
-      temperature: body['temperature'],
-      wind: body['wind'],
-      description: body['description'],
-      forecast: forecastList,
-    );
-
+    final ModelClima json = ModelClima.fromJson(body);
     if (response.statusCode == 200) {
       return json;
     } else if (response.statusCode == 404) {
@@ -34,3 +20,7 @@ class RepositoryClima {
     return json;
   }
 }
+
+//injeçao de independecia 
+
+//clean cod e nomeaçao 
