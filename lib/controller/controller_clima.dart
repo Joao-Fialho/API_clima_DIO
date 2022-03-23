@@ -1,20 +1,33 @@
 import 'package:api_clima_dio/model/model_clima.dart';
 import 'package:api_clima_dio/repository/repositotry_clima.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mobx/mobx.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+part 'controller_clima.g.dart';
 
-class ControllerClima extends ChangeNotifier {
+// abstract class ControllerMobx with Store{
+// Observable(ControllerClimaBase);
+// }
+class ControllerClima = ControllerClimaBase with _$ControllerClima;
+
+abstract class ControllerClimaBase with Store {
   final RepositoryClima repository;
+
+  @observable
   String cidade = 'Maringa';
-  ControllerClima({
+
+  ControllerClimaBase({
     required this.repository,
   });
-
+  @action
   Future<void> getClimaByCity() async {
     final modelClima = await repository.fetchClima(cidade);
     mapClima = modelClima;
-    notifyListeners();
+
+    // notifyListeners();
   }
 
+  @observable
   ModelClima mapClima = ModelClima(
     temperature: '',
     wind: '',
