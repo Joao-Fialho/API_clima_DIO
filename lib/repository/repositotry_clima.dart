@@ -21,6 +21,8 @@ class RepositoryClima {
   }
 }
 
-//injeçao de independecia 
+
+
+//injeçao de independecia com modular 
 
 //clean cod e nomeaçao 
